@@ -35,6 +35,8 @@ contract ZombieFactory {
   }
 
   function createRandomZombie(string _name) public {
+    //require throws an error if statement is false, continues execution if true
+    require(ownerZombieCount[msg.sender] == 0); // checks if first time for user
     uint randDna = _generateRandomDna(_name);
     _createZombie(_name, randDna);
   }
