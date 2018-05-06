@@ -19,7 +19,8 @@ contract ZombieFactory {
   mapping (uint => address) public zombieToOwner; //mapping the zombie to an address
   mapping (address => uint) ownerZombieCount; // mapping an adress to number of zombies
 
-  function _createZombie(string _name, uint _dna) private {
+  //external means only methods that inherit from this contract can call it
+  function _createZombie(string _name, uint _dna) external {
     // array.push()-1 returns value last added to array
     uint id = zombies.push(Zombie(_name, _dna)) - 1;
     //msg.sender refers to address of person who called the function
