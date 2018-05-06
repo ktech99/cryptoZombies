@@ -22,6 +22,9 @@ contract ZombieFactory {
   function _createZombie(string _name, uint _dna) private {
     // array.push()-1 returns value last added to array
     uint id = zombies.push(Zombie(_name, _dna)) - 1;
+    //msg.sender refers to address of person who called the function
+    zombieToOwner[id] = msg.sender; // adding zombie to persons address
+    ownerZombieCount[msg.sender]++; //increasing the number of zombies for that person
     //Firing the event
     NewZombie(id, _name, _dna);
   }
