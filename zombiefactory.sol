@@ -42,8 +42,3 @@ contract ZombieFactory {
   }
 
 }
-
-//inheritting from zombieFactory 
-contract zombieFeeding is zombieFactory {
-
-}
