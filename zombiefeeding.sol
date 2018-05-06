@@ -1,0 +1,3 @@
+contract zombieFeeding is zombieFactory {
+
+}
