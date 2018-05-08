@@ -1,6 +1,7 @@
 pragma solidity ^0.4.19;
+import "./Ownable.sol";
 
-contract ZombieFactory {
+contract ZombieFactory is Ownable{
 
   // creating an event to tell frontend that zombie created
   event NewZombie(uint zombieId, string name, uint dna);
