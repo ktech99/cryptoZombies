@@ -8,6 +8,7 @@ contract ZombieFactory is Ownable{
 
   uint dnaDigits = 16;
   uint dnaModulus = 10 ** dnaDigits;
+  uint cooldownTime = 1 days;
 
   //creating an object
   struct Zombie {
@@ -25,7 +26,7 @@ contract ZombieFactory is Ownable{
   //external means only methods that inherit from this contract can call it
   function _createZombie(string _name, uint _dna) external {
     // array.push()-1 returns value last added to array
-    uint id = zombies.push(Zombie(_name, _dna)) - 1;
+    uint id = zombies.push(Zombie(_name, _dna, 1, uint32(now + cooldownTime))) - 1;
     //msg.sender refers to address of person who called the function
     zombieToOwner[id] = msg.sender; // adding zombie to persons address
     ownerZombieCount[msg.sender]++; //increasing the number of zombies for that person
