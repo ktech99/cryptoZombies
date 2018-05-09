@@ -13,6 +13,8 @@ contract ZombieFactory is Ownable{
   struct Zombie {
     string name;
     uint dna;
+    uint32 level;
+    uint32 readyTime; //have similar types together to reduce gas
   }
 
   Zombie[] public zombies; // Array of type zombies
