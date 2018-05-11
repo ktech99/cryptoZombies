@@ -34,17 +34,19 @@ contract KittyInterface {
       return (zombie.readyTime <= now);
     }
 
-    function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) public {
+    function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) internal {
       require(msg.sender == zombieToOwner[_zombieId]); // requires feeder to be owner
       //storage stores to blockchain
       //memory stores to ram
       Zombie storage myZombie = zombies[_zombieId]; // adding zombie to blockchain storage
+      require(_isReady(myZombie));
       _targetDna = _targetDna % dnaModulus;
       uint newDna = (myZombie.dna + _targetDna)/2;
       if(keccak256(_species) == keccak256("kitty")){
         newDna = newDna % 100 + 99; // making the last 2 digits of dna 99 if kitty
       }
       _createZombie("NoName", newDna);
+      _triggerCooldown(myZombie);
     }
 
     function feedOnKitty(uint _zombieID, uint _kittyId) public {
